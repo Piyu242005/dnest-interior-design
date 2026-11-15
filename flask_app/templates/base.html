@@ -2,7 +2,7 @@
 <html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="D NEST Interior Design Studio — premium residential and commercial interior design.">
     <meta name="theme-color" content="#050505">
     <title>{{ page_title or 'D NEST Interior Design Studio' }}</title>
@@ -50,7 +50,15 @@
       :root{color-scheme:dark}
       *{box-sizing:border-box}
       html{scroll-behavior:smooth}
-      body{margin:0;font-family:Inter,sans-serif;background:#050505;color:#f8f6f1;-webkit-font-smoothing:antialiased}
+      body{
+        margin:0;
+        font-family:Inter,sans-serif;
+        background:#050505;
+        color:#f8f6f1;
+        -webkit-font-smoothing:antialiased;
+        overflow-x:hidden;
+        max-width:100vw;
+      }
       h1,h2,h3,.display-font{font-family:'Playfair Display',serif}
       .gold-line{height:1px;background:linear-gradient(90deg,transparent,rgba(212,164,55,.75),transparent)}
       .ambient-grain{background-image:radial-gradient(rgba(255,255,255,.06) .65px,transparent .65px);background-size:6px 6px;opacity:.08}
@@ -58,40 +66,150 @@
       .nav-link:after{content:'';position:absolute;left:50%;bottom:3px;width:0;height:1px;transform:translateX(-50%);background:#d4a437;transition:width .25s ease}
       .nav-link:hover:after,.nav-link[aria-current="page"]:after{width:24px}
 
-      /* Scroll reveal system */
+      /* Scroll reveal */
       .reveal-on-scroll{
         opacity:0;
         transform:translateY(32px);
         transition:opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
       }
-      .reveal-on-scroll.is-visible{
-        opacity:1;
-        transform:translateY(0);
-      }
+      .reveal-on-scroll.is-visible{opacity:1;transform:translateY(0)}
       .reveal-delay-1{transition-delay:0.1s}
       .reveal-delay-2{transition-delay:0.2s}
       .reveal-delay-3{transition-delay:0.3s}
       .reveal-delay-4{transition-delay:0.4s}
 
-      /* Navbar scroll state */
       #navbar.scrolled .nav-inner{
         background:rgba(5,5,5,0.92);
         border-color:rgba(212,164,55,0.28);
         box-shadow:0 10px 40px rgba(0,0,0,0.45);
       }
 
-      /* Smooth hover lift */
       .hover-lift{transition:transform 0.35s cubic-bezier(0.22,1,0.36,1), border-color 0.3s ease, box-shadow 0.35s ease}
       .hover-lift:hover{transform:translateY(-4px);border-color:rgba(212,164,55,0.4)}
 
-      /* Image zoom on hover */
       .img-zoom{overflow:hidden}
       .img-zoom img{transition:transform 0.9s cubic-bezier(0.22,1,0.36,1)}
       .img-zoom:hover img{transform:scale(1.06)}
 
-      /* Button press */
       .btn-press{transition:transform 0.15s ease, filter 0.2s ease}
       .btn-press:active{transform:scale(0.97)}
+
+      /* ========== GLOBAL MOBILE SAFETY ========== */
+      img, video, iframe, svg{
+        max-width:100%;
+        height:auto;
+      }
+      iframe{display:block}
+
+      /* Prevent decorative orbs / absolute blobs from causing horizontal scroll */
+      main section,
+      main .relative{
+        max-width:100%;
+      }
+      main [class*="blur-3xl"],
+      main [class*="blur-["],
+      main .absolute{
+        max-width:100vw;
+      }
+
+      /* Fluid media containers */
+      main img{
+        object-fit:cover;
+      }
+
+      /* Touch-friendly targets */
+      @media (max-width: 1023px){
+        a, button{
+          min-height:44px;
+        }
+        /* Slightly larger tap areas for icon buttons */
+        button.p-2\.5, button[aria-label]{
+          min-width:44px;
+          min-height:44px;
+        }
+      }
+
+      /* Mobile typography & spacing scale-down for legacy pages */
+      @media (max-width: 639px){
+        main h1{
+          font-size:clamp(1.85rem, 8vw, 2.75rem) !important;
+          line-height:1.15 !important;
+        }
+        main h2{
+          font-size:clamp(1.5rem, 6.5vw, 2.25rem) !important;
+          line-height:1.2 !important;
+        }
+        main h3{
+          font-size:clamp(1.15rem, 5vw, 1.5rem) !important;
+        }
+        /* Reduce excessive padding from legacy glass cards */
+        main .p-12, main .p-16, main [class*="p-12"], main [class*="p-16"]{
+          padding:1.5rem !important;
+        }
+        main .md\:p-12, main .md\:p-16{
+          padding:1.5rem !important;
+        }
+        main .py-24{
+          padding-top:3.5rem !important;
+          padding-bottom:3.5rem !important;
+        }
+        /* Constrain fixed decorative sizes */
+        main .w-72, main .w-96, main .h-72, main .h-96{
+          width:12rem !important;
+          height:12rem !important;
+        }
+        main .left-20, main .right-20{
+          left:0.5rem !important;
+          right:0.5rem !important;
+        }
+        /* Filter / chip rows */
+        main .filter-btn,
+        main .listing-filter-btn{
+          padding:0.6rem 1rem !important;
+          font-size:0.8rem !important;
+        }
+        /* Forms */
+        main input, main select, main textarea{
+          font-size:16px !important; /* prevents iOS zoom on focus */
+        }
+      }
+
+      @media (max-width: 374px){
+        main h1{font-size:1.75rem !important}
+        main .px-4, main .px-5{padding-left:0.875rem !important;padding-right:0.875rem !important}
+      }
+
+      /* Tablet tweaks */
+      @media (min-width: 640px) and (max-width: 1023px){
+        main .py-24{
+          padding-top:4.5rem !important;
+          padding-bottom:4.5rem !important;
+        }
+      }
+
+      /* Mobile menu open state */
+      body.menu-open{
+        overflow:hidden;
+      }
+      #mobile-menu{
+        max-height:0;
+        overflow:hidden;
+        transition:max-height 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.25s ease;
+        opacity:0;
+      }
+      #mobile-menu.is-open{
+        max-height:420px;
+        opacity:1;
+      }
+      #mobile-menu.hidden{
+        display:block !important; /* we control via is-open */
+        max-height:0;
+        opacity:0;
+        pointer-events:none;
+      }
+      #mobile-menu.is-open.hidden{
+        pointer-events:auto;
+      }
 
       /* Global D NEST visual system */
       main{background:#050505;color:#f8f6f1}
@@ -128,10 +246,17 @@
       main h1,main h2,main h3{letter-spacing:-.01em}
       main section img{filter:saturate(.88) contrast(1.03)}
 
+      /* Disable hover transforms on touch devices to avoid sticky states */
+      @media (hover: none){
+        .hover-lift:hover{transform:none}
+        .img-zoom:hover img{transform:none}
+      }
+
       @media (prefers-reduced-motion: reduce){
         *,*:before,*:after{animation:none!important;transition:none!important}
         .reveal-on-scroll{opacity:1;transform:none}
         html{scroll-behavior:auto}
+        #mobile-menu{transition:none}
       }
     </style>
     {% block extra_head %}{% endblock %}
@@ -139,16 +264,16 @@
 <body class="min-h-screen bg-[#050505] text-[#F8F6F1]">
 <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded bg-champagne px-4 py-2 text-ink">Skip to content</a>
 
-<nav id="navbar" class="fixed inset-x-0 top-0 z-50 px-3 sm:px-6 py-4 transition-all duration-300" aria-label="Primary navigation">
-  <div class="nav-inner mx-auto max-w-7xl border border-champagne/20 bg-black/55 backdrop-blur-xl rounded-md px-4 sm:px-6 transition-all duration-300">
-    <div class="flex h-[66px] items-center justify-between">
-      <a href="{{ url_for('home') }}" class="flex items-center gap-3 group" aria-label="D NEST home">
-        <div class="grid h-11 w-11 place-items-center rounded-sm border border-champagne/55 bg-black transition group-hover:border-champagne">
-          <span class="font-serif text-xl text-champagne">D</span>
+<nav id="navbar" class="fixed inset-x-0 top-0 z-50 px-3 sm:px-6 py-3 sm:py-4 transition-all duration-300" aria-label="Primary navigation">
+  <div class="nav-inner mx-auto max-w-7xl border border-champagne/20 bg-black/55 backdrop-blur-xl rounded-md px-3 sm:px-6 transition-all duration-300">
+    <div class="flex h-[60px] sm:h-[66px] items-center justify-between">
+      <a href="{{ url_for('home') }}" class="flex items-center gap-2.5 sm:gap-3 group min-w-0" aria-label="D NEST home">
+        <div class="grid h-10 w-10 sm:h-11 sm:w-11 shrink-0 place-items-center rounded-sm border border-champagne/55 bg-black transition group-hover:border-champagne">
+          <span class="font-serif text-lg sm:text-xl text-champagne">D</span>
         </div>
-        <div class="hidden sm:block">
-          <div class="text-lg tracking-[.28em] leading-none text-ivory">D NEST</div>
-          <div class="mt-1 text-[8px] uppercase tracking-[.28em] text-champagne">Interior Design Studio</div>
+        <div class="hidden min-[400px]:block min-w-0">
+          <div class="text-base sm:text-lg tracking-[.22em] sm:tracking-[.28em] leading-none text-ivory truncate">D NEST</div>
+          <div class="mt-0.5 sm:mt-1 text-[7px] sm:text-[8px] uppercase tracking-[.22em] sm:tracking-[.28em] text-champagne">Interior Design Studio</div>
         </div>
       </a>
 
@@ -163,73 +288,87 @@
         {% endfor %}
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
         <a href="{{ url_for('consultation') }}"
-           class="hidden md:inline-flex rounded-sm border border-champagne/50 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[.08em] text-champagne hover:bg-champagne hover:text-ink transition btn-press">
+           class="hidden md:inline-flex rounded-sm border border-champagne/50 px-4 lg:px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[.08em] text-champagne hover:bg-champagne hover:text-ink transition btn-press">
           Start a Project
         </a>
-        <button id="mobile-menu-btn" class="lg:hidden rounded-sm border border-champagne/20 bg-white/5 p-2.5" aria-label="Open navigation">
-          <i data-lucide="menu" class="h-5 w-5"></i>
+        <button id="mobile-menu-btn" type="button"
+                class="lg:hidden rounded-sm border border-champagne/20 bg-white/5 p-2.5 flex items-center justify-center"
+                aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu">
+          <i data-lucide="menu" class="h-5 w-5 menu-icon-open"></i>
+          <i data-lucide="x" class="h-5 w-5 menu-icon-close hidden"></i>
         </button>
       </div>
     </div>
 
-    <div id="mobile-menu" class="lg:hidden hidden border-t border-champagne/10 py-3">
-      {% for route,label,icon in nav_items %}
-      <a href="{{ url_for(route) }}" class="flex items-center gap-3 rounded px-3 py-3 text-sm text-stone hover:bg-white/5 hover:text-ivory">
-        <i data-lucide="{{ icon }}" class="h-4 w-4"></i>{{ label }}
-      </a>
-      {% endfor %}
+    <div id="mobile-menu" class="lg:hidden border-t border-champagne/10" role="navigation" aria-label="Mobile">
+      <div class="py-2">
+        {% for route,label,icon in nav_items %}
+        <a href="{{ url_for(route) }}"
+           class="mobile-nav-link flex items-center gap-3 rounded px-3 py-3.5 text-sm text-stone hover:bg-white/5 hover:text-ivory active:bg-white/10">
+          <i data-lucide="{{ icon }}" class="h-4 w-4 shrink-0"></i>{{ label }}
+        </a>
+        {% endfor %}
+        <a href="{{ url_for('consultation') }}"
+           class="mobile-nav-link mt-1 mx-3 mb-2 flex items-center justify-center gap-2 rounded-sm bg-champagne px-4 py-3 text-sm font-semibold text-ink">
+          Start a Project
+        </a>
+      </div>
     </div>
   </div>
 </nav>
 
 <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-  <div class="absolute -top-40 left-1/3 h-[520px] w-[520px] rounded-full bg-champagne/5 blur-[150px]"></div>
+  <div class="absolute -top-40 left-1/3 h-[320px] w-[320px] sm:h-[520px] sm:w-[520px] rounded-full bg-champagne/5 blur-[100px] sm:blur-[150px]"></div>
   <div class="absolute inset-0 ambient-grain"></div>
 </div>
 
 <main id="main-content">{% block content %}{% endblock %}</main>
 
 <footer class="border-t border-champagne/15 bg-[#080808]">
-  <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-14">
-    <div class="gold-line mb-10"></div>
-    <div class="grid gap-10 lg:grid-cols-12">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    <div class="gold-line mb-8 sm:mb-10"></div>
+    <div class="grid gap-8 sm:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-12">
       <div class="lg:col-span-5">
         <div class="text-lg tracking-[.25em]">D NEST</div>
         <div class="mt-1 text-[8px] uppercase tracking-[.3em] text-champagne">Interior Design Studio</div>
-        <p class="mt-5 max-w-md text-sm leading-7 text-stone">Spaces shaped with restraint, warmth, proportion and timeless character.</p>
+        <p class="mt-4 sm:mt-5 max-w-md text-sm leading-7 text-stone">Spaces shaped with restraint, warmth, proportion and timeless character.</p>
       </div>
       <div class="lg:col-span-2">
         <h3 class="text-[10px] uppercase tracking-[.22em] text-champagne">Explore</h3>
-        <div class="mt-4 space-y-2 text-sm text-stone">
-          <a href="{{ url_for('about') }}" class="block hover:text-ivory transition">About</a>
-          <a href="{{ url_for('services') }}" class="block hover:text-ivory transition">Services</a>
-          <a href="{{ url_for('portfolio') }}" class="block hover:text-ivory transition">Projects</a>
-          <a href="{{ url_for('contact') }}" class="block hover:text-ivory transition">Contact</a>
+        <div class="mt-3 sm:mt-4 space-y-2 text-sm text-stone">
+          <a href="{{ url_for('about') }}" class="block hover:text-ivory transition py-0.5">About</a>
+          <a href="{{ url_for('services') }}" class="block hover:text-ivory transition py-0.5">Services</a>
+          <a href="{{ url_for('portfolio') }}" class="block hover:text-ivory transition py-0.5">Projects</a>
+          <a href="{{ url_for('contact') }}" class="block hover:text-ivory transition py-0.5">Contact</a>
         </div>
       </div>
       <div class="lg:col-span-3">
         <h3 class="text-[10px] uppercase tracking-[.22em] text-champagne">Studio</h3>
-        <div class="mt-4 space-y-2 text-sm text-stone">
+        <div class="mt-3 sm:mt-4 space-y-2 text-sm text-stone">
           <div>Amravati, Maharashtra</div>
-          <div>+91 8855667788</div>
-          <div>piyu143247@gmail.com</div>
+          <div><a href="tel:+918855667788" class="hover:text-ivory transition">+91 8855667788</a></div>
+          <div><a href="mailto:piyu143247@gmail.com" class="hover:text-ivory transition break-all">piyu143247@gmail.com</a></div>
         </div>
       </div>
       <div class="lg:col-span-2">
         <h3 class="text-[10px] uppercase tracking-[.22em] text-champagne">Connect</h3>
-        <div class="mt-4 flex gap-2">
-          <a href="https://www.instagram.com/my.life_24143" target="_blank" rel="noopener" class="grid h-10 w-10 place-items-center border border-champagne/20 hover:bg-champagne hover:text-ink transition">
+        <div class="mt-3 sm:mt-4 flex gap-2">
+          <a href="https://www.instagram.com/my.life_24143" target="_blank" rel="noopener"
+             class="grid h-11 w-11 place-items-center border border-champagne/20 hover:bg-champagne hover:text-ink transition"
+             aria-label="Instagram">
             <i data-lucide="instagram" class="h-4 w-4"></i>
           </a>
-          <a href="https://www.linkedin.com/in/piyush-ramteke-24-mylife" target="_blank" rel="noopener" class="grid h-10 w-10 place-items-center border border-champagne/20 hover:bg-champagne hover:text-ink transition">
+          <a href="https://www.linkedin.com/in/piyush-ramteke-24-mylife" target="_blank" rel="noopener"
+             class="grid h-11 w-11 place-items-center border border-champagne/20 hover:bg-champagne hover:text-ink transition"
+             aria-label="LinkedIn">
             <i data-lucide="linkedin" class="h-4 w-4"></i>
           </a>
         </div>
       </div>
     </div>
-    <div class="mt-10 border-t border-champagne/10 pt-5 text-xs text-stone flex flex-col sm:flex-row justify-between gap-2">
+    <div class="mt-8 sm:mt-10 border-t border-champagne/10 pt-5 text-xs text-stone flex flex-col sm:flex-row justify-between gap-2">
       <span>© {{ current_year }} D NEST Interior Design Studio.</span>
       <span class="uppercase tracking-[.12em]">Classic • Premium • Timeless</span>
     </div>
@@ -239,10 +378,52 @@
 <script>
   lucide.createIcons();
 
-  // Mobile menu
+  // Mobile menu with smooth open/close + icon toggle
   const mb = document.getElementById('mobile-menu-btn');
   const mm = document.getElementById('mobile-menu');
-  if (mb) mb.addEventListener('click', () => mm.classList.toggle('hidden'));
+  const iconOpen = mb ? mb.querySelector('.menu-icon-open') : null;
+  const iconClose = mb ? mb.querySelector('.menu-icon-close') : null;
+
+  function setMenuOpen(open) {
+    if (!mm || !mb) return;
+    if (open) {
+      mm.classList.remove('hidden');
+      // force reflow for transition
+      void mm.offsetHeight;
+      mm.classList.add('is-open');
+      mb.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');
+      if (iconOpen) iconOpen.classList.add('hidden');
+      if (iconClose) iconClose.classList.remove('hidden');
+    } else {
+      mm.classList.remove('is-open');
+      mb.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+      if (iconOpen) iconOpen.classList.remove('hidden');
+      if (iconClose) iconClose.classList.add('hidden');
+      setTimeout(() => {
+        if (!mm.classList.contains('is-open')) mm.classList.add('hidden');
+      }, 350);
+    }
+    lucide.createIcons();
+  }
+
+  if (mb && mm) {
+    // start closed
+    mm.classList.add('hidden');
+    mb.addEventListener('click', () => {
+      const isOpen = mm.classList.contains('is-open');
+      setMenuOpen(!isOpen);
+    });
+    // Close when a nav link is tapped
+    mm.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+    // Close on resize to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) setMenuOpen(false);
+    }, { passive: true });
+  }
 
   // Navbar scroll effect
   const navbar = document.getElementById('navbar');
@@ -261,8 +442,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
     revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('is-visible'));
