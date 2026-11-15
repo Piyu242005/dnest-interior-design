@@ -1,51 +1,276 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="relative min-h-screen overflow-hidden flex items-center">
+<!-- ========== HERO ========== -->
+<section class="relative min-h-[100svh] overflow-hidden flex items-center">
+  <!-- Background -->
   <div class="absolute inset-0">
-    <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=2200" alt="Luxury D NEST interior" class="h-full w-full object-cover object-center opacity-70">
-    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/35"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,rgba(212,164,67,.16),transparent_38%)]"></div>
+    <img
+      src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=2200"
+      alt="Luxury D NEST interior"
+      class="h-full w-full object-cover object-center scale-105"
+      loading="eager"
+    >
+    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,rgba(212,164,55,0.12),transparent_50%)]"></div>
   </div>
 
-  <div class="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8 pt-28 pb-20">
-    <div class="max-w-2xl">
-      <div class="mb-8 flex items-center gap-4">
-        <div class="grid h-16 w-16 shrink-0 place-items-center rounded-2xl border border-champagne/40 bg-black/45 p-2 shadow-champagne backdrop-blur-md">
+  <div class="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8 pt-28 pb-16 lg:pb-20">
+    <div class="max-w-3xl">
+      <!-- Brand mark -->
+      <div class="reveal-on-scroll mb-8 flex items-center gap-4">
+        <div class="grid h-14 w-14 sm:h-16 sm:w-16 shrink-0 place-items-center rounded-sm border border-champagne/45 bg-black/50 p-2 shadow-champagne backdrop-blur-md">
           <img src="{{ url_for('static', filename='images/Piyu.png') }}" alt="D NEST logo" class="h-full w-full object-contain" loading="eager">
         </div>
         <div>
-          <div class="text-2xl font-semibold tracking-[.22em] text-ivory">D NEST</div>
+          <div class="text-xl sm:text-2xl font-semibold tracking-[.22em] text-ivory">D NEST</div>
           <div class="mt-1 text-[9px] uppercase tracking-[.3em] text-champagne">Interior Design Studio</div>
         </div>
       </div>
 
-      <p class="mb-4 text-xs uppercase tracking-[.38em] text-champagne">We Design Spaces</p>
-      <h1 class="display-font text-6xl sm:text-7xl lg:text-8xl font-medium leading-[.9] text-ivory">That Inspire<span class="block text-champagne italic">Lifestyles.</span></h1>
-      <p class="mt-7 max-w-xl text-base sm:text-lg leading-8 text-stone">Premium interior design solutions crafted with elegance, functionality & class.</p>
-      <div class="mt-9 flex flex-wrap items-center gap-4">
-        <a href="{{ url_for('portfolio') }}" class="inline-flex items-center gap-3 rounded-md bg-champagne px-6 py-3.5 text-sm font-semibold text-ink shadow-champagne hover:brightness-110 transition">Explore Our Work <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-        <a href="{{ url_for('contact') }}" class="inline-flex items-center gap-3 text-sm font-semibold text-ivory hover:text-champagne transition"><span class="grid h-10 w-10 place-items-center rounded-full border border-champagne/60"><i data-lucide="play" class="w-4 h-4 fill-current"></i></span> Watch Showreel</a>
+      <p class="reveal-on-scroll reveal-delay-1 mb-4 text-[11px] sm:text-xs uppercase tracking-[.35em] text-champagne">
+        We Design Spaces
+      </p>
+
+      <h1 class="reveal-on-scroll reveal-delay-1 display-font text-[2.75rem] sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-[0.95] text-ivory">
+        That Inspire
+        <span class="block text-champagne italic mt-1">Lifestyles.</span>
+      </h1>
+
+      <p class="reveal-on-scroll reveal-delay-2 mt-6 sm:mt-7 max-w-lg text-base sm:text-lg leading-relaxed text-stone">
+        Premium interior design solutions crafted with elegance, functionality and timeless class.
+      </p>
+
+      <div class="reveal-on-scroll reveal-delay-3 mt-8 sm:mt-10 flex flex-wrap items-center gap-3 sm:gap-4">
+        <a href="{{ url_for('portfolio') }}"
+           class="btn-press inline-flex items-center gap-2.5 rounded-sm bg-champagne px-6 sm:px-7 py-3.5 text-sm font-semibold text-ink shadow-champagne hover:brightness-110 transition">
+          Explore Our Work
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <a href="{{ url_for('consultation') }}"
+           class="btn-press inline-flex items-center gap-2.5 rounded-sm border border-champagne/50 px-6 sm:px-7 py-3.5 text-sm font-semibold text-ivory hover:bg-champagne/10 hover:border-champagne transition">
+          Book Consultation
+        </a>
       </div>
     </div>
 
-    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 border-y border-champagne/20">
-      {% set pillars=[('Bespoke Design','Tailored to your lifestyle','ruler'),('Premium Quality','Finest materials & craftsmanship','gem'),('Expert Team','Passionate professionals','users')] %}
-      {% for title,desc,icon in pillars %}
-      <div class="flex items-center gap-4 border-b md:border-b-0 md:border-r last:border-r-0 border-champagne/15 px-5 py-6"><div class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-champagne/45 bg-black/30 text-champagne"><i data-lucide="{{ icon }}" class="w-5 h-5"></i></div><div><h3 class="text-xs uppercase tracking-[.18em] text-ivory">{{ title }}</h3><p class="mt-1 text-xs text-stone">{{ desc }}</p></div></div>
+    <!-- Pillars strip -->
+    <div class="reveal-on-scroll reveal-delay-4 mt-14 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 border-y border-champagne/20">
+      {% set pillars = [
+        ('Bespoke Design', 'Tailored to your lifestyle', 'ruler'),
+        ('Premium Quality', 'Finest materials & craftsmanship', 'gem'),
+        ('Expert Team', 'Passionate professionals', 'users')
+      ] %}
+      {% for title, desc, icon in pillars %}
+      <div class="flex items-center gap-4 border-b sm:border-b-0 sm:border-r last:border-0 border-champagne/15 px-5 py-5 sm:py-6">
+        <div class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-champagne/40 bg-black/40 text-champagne">
+          <i data-lucide="{{ icon }}" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="text-xs uppercase tracking-[.18em] text-ivory">{{ title }}</h3>
+          <p class="mt-1 text-xs text-stone">{{ desc }}</p>
+        </div>
+      </div>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<section class="relative py-24 bg-[#0a0a0a]"><div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8"><div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10"><div><p class="text-[11px] uppercase tracking-[.3em] text-champagne">Projects</p><h2 class="display-font mt-2 text-5xl text-ivory">Our Signature Work</h2></div><a href="{{ url_for('portfolio') }}" class="text-sm text-stone hover:text-champagne transition">View all projects →</a></div><div class="grid grid-cols-1 md:grid-cols-3 gap-5">{% for project in featured_projects[:3] %}<a href="{{ url_for('portfolio') }}" class="group overflow-hidden rounded-sm border border-champagne/15 bg-[#111]"><div class="aspect-[4/3] overflow-hidden"><img src="{{ project.image_url }}" alt="{{ project.title }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105"></div><div class="p-5"><p class="text-[10px] uppercase tracking-[.2em] text-champagne">{{ project.location }} • {{ project.year }}</p><h3 class="display-font mt-2 text-2xl text-ivory">{{ project.title }}</h3></div></a>{% endfor %}</div></div></section>
+<!-- ========== STATS ========== -->
+<section class="py-12 sm:py-14 border-b border-champagne/10 bg-[#080808]">
+  <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      {% for stat in stats %}
+      <div class="reveal-on-scroll text-center {% if not loop.last %}lg:border-r lg:border-champagne/10{% endif %}">
+        <p class="display-font text-3xl sm:text-4xl text-champagne">{{ stat.value }}</p>
+        <p class="mt-1.5 text-[11px] sm:text-xs uppercase tracking-[.2em] text-stone">{{ stat.label }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
-<section class="py-24 bg-[#0b0b0b]"><div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8"><div class="text-center mb-12"><p class="text-[11px] uppercase tracking-[.3em] text-champagne">Services</p><h2 class="display-font mt-2 text-5xl text-ivory">We Design Experiences</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">{% for service in services[:4] %}<a href="{{ url_for('services') }}" class="group rounded-sm border border-champagne/15 bg-[#111] p-7 hover:border-champagne/45 hover:-translate-y-1 transition-all"><div class="grid h-12 w-12 place-items-center rounded-full border border-champagne/35 text-champagne mb-6"><i data-lucide="{{ service.icon }}" class="w-5 h-5"></i></div><h3 class="display-font text-2xl text-ivory">{{ service.title }}</h3><p class="mt-3 text-sm leading-6 text-stone">{{ service.description[:110] }}...</p><span class="mt-6 inline-flex text-xs uppercase tracking-[.15em] text-champagne">Explore →</span></a>{% endfor %}</div></div></section>
+<!-- ========== SIGNATURE WORK ========== -->
+<section class="relative py-20 sm:py-24 lg:py-28 bg-[#0a0a0a]">
+  <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+    <div class="reveal-on-scroll flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 sm:mb-12">
+      <div>
+        <p class="text-[11px] uppercase tracking-[.3em] text-champagne">Projects</p>
+        <h2 class="display-font mt-2 text-4xl sm:text-5xl text-ivory">Our Signature Work</h2>
+      </div>
+      <a href="{{ url_for('portfolio') }}"
+         class="inline-flex items-center gap-2 text-sm text-stone hover:text-champagne transition group">
+        View all projects
+        <i data-lucide="arrow-right" class="w-4 h-4 transition group-hover:translate-x-1"></i>
+      </a>
+    </div>
 
-<section class="py-24 bg-[#080808]"><div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-stretch"><div class="rounded-sm border border-champagne/15 bg-[#101010] p-8 sm:p-10"><p class="text-[11px] uppercase tracking-[.3em] text-champagne">About Us</p><h2 class="display-font mt-3 text-5xl text-ivory">Designing Spaces,<br>Creating Stories</h2><p class="mt-6 text-sm leading-7 text-stone">At D NEST, we believe every space has a story to tell. Our mission is to transform your vision into reality with creativity, precision and timeless elegance.</p><a href="{{ url_for('about') }}" class="mt-7 inline-flex rounded-md border border-champagne/40 px-5 py-3 text-xs uppercase tracking-[.15em] text-champagne hover:bg-champagne hover:text-ink transition">Know More About Us</a></div><div class="grid grid-cols-2 gap-4"><div class="rounded-sm overflow-hidden border border-champagne/15 bg-[#111]"><img src="https://raw.githubusercontent.com/Piyu242005/dnest-interior-design/main/ScreenShot/1749496203858~3.jpg" alt="D NEST co-founder Piyush" class="h-full w-full object-cover object-top"></div><div class="rounded-sm overflow-hidden border border-champagne/15 bg-[#111]"><img src="{{ url_for('static', filename='images/nikhil.jpeg') }}" alt="D NEST co-founder Nikhil" class="h-full w-full object-cover object-top"></div></div></div></section>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+      {% for project in featured_projects[:3] %}
+      <a href="{{ url_for('portfolio') }}"
+         class="reveal-on-scroll group block overflow-hidden rounded-sm border border-champagne/15 bg-[#111] hover-lift
+                {% if loop.index == 2 %}reveal-delay-1{% elif loop.index == 3 %}reveal-delay-2{% endif %}">
+        <div class="img-zoom aspect-[4/3]">
+          <img
+            src="{{ project.image_url }}"
+            alt="{{ project.title }}"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          >
+        </div>
+        <div class="p-5 sm:p-6">
+          <p class="text-[10px] uppercase tracking-[.2em] text-champagne">
+            {{ project.location }} · {{ project.year }}
+          </p>
+          <h3 class="display-font mt-2 text-xl sm:text-2xl text-ivory group-hover:text-champagne transition">
+            {{ project.title }}
+          </h3>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
-<section class="py-24 bg-[#0a0a0a]"><div class="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8 text-center"><p class="text-[11px] uppercase tracking-[.3em] text-champagne">Client Testimonials</p><h2 class="display-font mt-2 text-5xl text-ivory">What Our Clients Say</h2><div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 text-left">{% for testimonial in testimonials[:2] %}<div class="rounded-sm border border-champagne/15 bg-[#111] p-7"><div class="text-4xl text-champagne font-serif">“</div><p class="mt-2 text-sm leading-7 text-stone">{{ testimonial.text }}</p><div class="mt-6 flex items-center gap-3"><img src="{{ testimonial.image }}" alt="{{ testimonial.name }}" class="h-10 w-10 rounded-full object-cover"><div><div class="text-sm text-ivory">{{ testimonial.name }}</div><div class="text-xs text-stone">{{ testimonial.role }}</div></div></div></div>{% endfor %}</div></div></section>
+<!-- ========== SERVICES ========== -->
+<section class="py-20 sm:py-24 lg:py-28 bg-[#0b0b0b]">
+  <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+    <div class="reveal-on-scroll text-center mb-12 sm:mb-14">
+      <p class="text-[11px] uppercase tracking-[.3em] text-champagne">Services</p>
+      <h2 class="display-font mt-2 text-4xl sm:text-5xl text-ivory">We Design Experiences</h2>
+      <p class="mt-4 max-w-xl mx-auto text-sm text-stone leading-relaxed">
+        From concept to completion — thoughtful design for homes and workspaces.
+      </p>
+    </div>
 
-<section class="py-20 bg-[#0b0b0b]"><div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 rounded-sm border border-champagne/15 bg-[#111] p-8 sm:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8"><div><p class="text-[11px] uppercase tracking-[.3em] text-champagne">Ready to Transform Your Space?</p><h2 class="display-font mt-2 text-4xl text-ivory">Let's create something extraordinary together.</h2></div><a href="{{ url_for('consultation') }}" class="shrink-0 inline-flex items-center gap-2 rounded-md bg-champagne px-6 py-3.5 text-sm font-semibold text-ink hover:brightness-110 transition">Start Your Project <i data-lucide="arrow-right" class="w-4 h-4"></i></a></div></section>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+      {% for service in services[:4] %}
+      <a href="{{ url_for('services') }}"
+         class="reveal-on-scroll group rounded-sm border border-champagne/15 bg-[#111] p-6 sm:p-7 hover-lift
+                {% if loop.index == 2 %}reveal-delay-1{% elif loop.index == 3 %}reveal-delay-2{% elif loop.index == 4 %}reveal-delay-3{% endif %}">
+        <div class="grid h-12 w-12 place-items-center rounded-full border border-champagne/35 text-champagne mb-5 transition group-hover:bg-champagne group-hover:text-ink group-hover:border-champagne">
+          <i data-lucide="{{ service.icon }}" class="w-5 h-5"></i>
+        </div>
+        <h3 class="display-font text-xl sm:text-2xl text-ivory">{{ service.title }}</h3>
+        <p class="mt-3 text-sm leading-6 text-stone line-clamp-3">
+          {{ service.description[:110] }}{% if service.description|length > 110 %}…{% endif %}
+        </p>
+        <span class="mt-6 inline-flex items-center gap-1.5 text-xs uppercase tracking-[.15em] text-champagne">
+          Explore
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition group-hover:translate-x-1"></i>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="py-20 sm:py-24 lg:py-28 bg-[#080808]">
+  <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+      <div class="reveal-on-scroll order-2 lg:order-1">
+        <p class="text-[11px] uppercase tracking-[.3em] text-champagne">About Us</p>
+        <h2 class="display-font mt-3 text-4xl sm:text-5xl text-ivory leading-tight">
+          Designing Spaces,<br>
+          <span class="text-champagne italic">Creating Stories</span>
+        </h2>
+        <p class="mt-6 text-sm sm:text-base leading-7 text-stone max-w-md">
+          At D NEST, we believe every space has a story to tell. Our mission is to transform your vision into reality with creativity, precision and timeless elegance.
+        </p>
+        <a href="{{ url_for('about') }}"
+           class="btn-press mt-8 inline-flex items-center gap-2 rounded-sm border border-champagne/45 px-6 py-3 text-xs uppercase tracking-[.15em] text-champagne hover:bg-champagne hover:text-ink transition">
+          Know More About Us
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+      <div class="reveal-on-scroll reveal-delay-1 order-1 lg:order-2 grid grid-cols-2 gap-3 sm:gap-4">
+        <div class="img-zoom rounded-sm overflow-hidden border border-champagne/15 bg-[#111] aspect-[3/4]">
+          <img
+            src="https://raw.githubusercontent.com/Piyu242005/dnest-interior-design/main/ScreenShot/1749496203858~3.jpg"
+            alt="D NEST co-founder Piyush"
+            class="h-full w-full object-cover object-top"
+            loading="lazy"
+          >
+        </div>
+        <div class="img-zoom rounded-sm overflow-hidden border border-champagne/15 bg-[#111] aspect-[3/4] mt-6 sm:mt-10">
+          <img
+            src="{{ url_for('static', filename='images/nikhil.jpeg') }}"
+            alt="D NEST co-founder Nikhil"
+            class="h-full w-full object-cover object-top"
+            loading="lazy"
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="py-20 sm:py-24 lg:py-28 bg-[#0a0a0a]">
+  <div class="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
+    <div class="reveal-on-scroll text-center mb-12">
+      <p class="text-[11px] uppercase tracking-[.3em] text-champagne">Client Testimonials</p>
+      <h2 class="display-font mt-2 text-4xl sm:text-5xl text-ivory">What Our Clients Say</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+      {% for testimonial in testimonials[:2] %}
+      <div class="reveal-on-scroll {% if loop.index == 2 %}reveal-delay-1{% endif %} rounded-sm border border-champagne/15 bg-[#111] p-6 sm:p-8 hover-lift">
+        <div class="text-4xl leading-none text-champagne font-serif select-none">“</div>
+        <p class="mt-2 text-sm sm:text-base leading-7 text-stone">{{ testimonial.text }}</p>
+        <div class="mt-6 flex items-center gap-3">
+          <img
+            src="{{ testimonial.image }}"
+            alt="{{ testimonial.name }}"
+            class="h-11 w-11 rounded-full object-cover border border-champagne/25"
+            loading="lazy"
+          >
+          <div>
+            <div class="text-sm text-ivory font-medium">{{ testimonial.name }}</div>
+            <div class="text-xs text-stone">{{ testimonial.role }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ========== FINAL CTA ========== -->
+<section class="py-16 sm:py-20 bg-[#0b0b0b]">
+  <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+    <div class="reveal-on-scroll relative overflow-hidden rounded-sm border border-champagne/20 bg-[#111] px-6 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-14">
+      <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-champagne/5 blur-3xl pointer-events-none"></div>
+
+      <div class="relative flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+        <div class="max-w-xl">
+          <p class="text-[11px] uppercase tracking-[.3em] text-champagne">Ready to Transform Your Space?</p>
+          <h2 class="display-font mt-3 text-3xl sm:text-4xl lg:text-[2.75rem] text-ivory leading-tight">
+            Let’s create something extraordinary together.
+          </h2>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+          <a href="{{ url_for('consultation') }}"
+             class="btn-press inline-flex items-center justify-center gap-2 rounded-sm bg-champagne px-7 py-3.5 text-sm font-semibold text-ink hover:brightness-110 transition shadow-champagne">
+            Start Your Project
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          <a href="{{ url_for('contact') }}"
+             class="btn-press inline-flex items-center justify-center gap-2 rounded-sm border border-champagne/40 px-7 py-3.5 text-sm font-semibold text-ivory hover:bg-champagne/10 transition">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
-{% block extra_scripts %}<script>document.addEventListener('DOMContentLoaded',()=>lucide.createIcons());</script>{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+</script>
+{% endblock %}
